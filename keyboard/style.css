@@ -26,8 +26,11 @@ body {
 	font-size: 18px; 
 }
 
-/* .container {
-    width: 1280px;
-    margin: 0 auto;
-	padding: 0 40px;
-} */
+.container {
+    position: absolute;
+    top: calc(50% - 270px);
+    left: calc(50% - 375px);
+    width: 750px;
+    height: 540px;
+    background: yellow;
+}
