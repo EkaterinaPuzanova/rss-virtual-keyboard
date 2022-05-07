@@ -30,15 +30,9 @@ divContainer.appendChild(pDiscription);
 divContainer.appendChild(pLanguage);
 
 const arrKeyboardEn = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace', 'Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'Del', 'CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'Enter', 'Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '▲', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', '◀', '▼', '▶', 'Ctrl'];
-const arrClassKeyboardEn = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace', 'tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'delete', 'capslock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'enter', 'shift-left', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'arrow-up', 'shift-right', 'control', 'meta', 'alt', 'space', 'alt', 'arrow-left', 'arrow-down', 'arrow-right', 'control'];
-// document.onkeydown = function (event) {
-//     arrKeyboardEn.push(event.key);
-//     console.log(arrKeyboardEn);
-// }
+const arrClassKeyboardEn = ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace', 'Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash', 'Delete', 'CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter', 'ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ArrowUp', 'ShiftRight', 'ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlRight'];
 
-// key: "q"
-// keyCode: 81
-console.log(arrKeyboardEn[20]);
+
 
 for (let i = 0; i < arrKeyboardEn.length; i += 1) {
     divKeyboard.innerHTML += `     
@@ -47,3 +41,34 @@ for (let i = 0; i < arrKeyboardEn.length; i += 1) {
                 </div>
             `;
 }
+
+
+// add input to the textarea when pressing the computer keyboard - start
+let valueFocus = false;
+
+textarea.addEventListener('focus', function() {
+    valueFocus = true;
+});
+textarea.addEventListener('focusout', function() {
+    valueFocus = false;
+    textarea.selectionStart = textarea.value.length;
+});
+
+window.addEventListener('keydown', function(event) {
+    if (valueFocus === false) {
+        this.document.querySelector(`.${event.code}`).classList.add('active');
+        textarea.setRangeText(`${event.key}`, textarea.selectionStart, textarea.selectionEnd, "end");
+    } else {
+        this.document.querySelector(`.${event.code}`).classList.add('active');
+    } 
+}); 
+// add input to the textarea when pressing the computer keyboard - end
+
+
+window.addEventListener('keyup', function(event) {
+    this.document.querySelector(`.${event.code}`).classList.remove('active');
+    this.document.querySelector(`.${event.code}`).classList.add('remove');
+    this.setTimeout(() => {
+        this.document.querySelector(`.${event.code}`).classList.remove('remove');
+    }, 300)
+});

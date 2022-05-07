@@ -39,7 +39,7 @@ body {
     font-family: 'Arial';
 	font-size: 28px; 
     color: rgb(14, 27, 218);
-    text-shadow: 1px 1px 1px rgb(6, 176, 228), 0 0 1em blue, 0 0 0.2em blue;
+    text-shadow: 1px 1px 0.5px rgb(6, 176, 228), 0 0 1px blue, 0 0 0.2px blue;
     text-align: center;
 }
 
@@ -48,9 +48,9 @@ body {
     width: 671px;
     margin: 10px auto 10px;
     padding: 10px;
-    font-family: inherit;
+    font-family: 'Arial';
     font-size: 18px;
-    color: aliceblue;
+    color: rgb(0, 0, 0);
     overflow: auto;
 }
 
@@ -83,29 +83,53 @@ body {
     color: aliceblue;
     border-radius: 3px;
     cursor: pointer;
+    transition: all 0.3s;
 }
 .key:hover {
     background: #1d11c4;
     opacity: .5;
 }
 
-.backspace, .capslock, .shift-left {
+.key.active {
+    color: rgb(14, 27, 218);
+    background: #7a7a7a;
+	box-shadow: 0 7px 7px -7px rgb(4, 0, 255);
+	transform: translatey(1.5px);
+    
+}
+
+.key.remove {
+    animation: keys_animation 0.5s forwards;
+}
+
+@keyframes keys_animation {
+    0% {
+        background: #535252;
+        color: aliceblue;
+    }
+    100% {
+        background: rgb(30, 228, 228);
+        color: rgb(0, 0, 0);
+    }
+}
+
+.Backspace, .CapsLock, .ShiftLeft {
     width: 95px;
 }
 
-.tab{
+.Tab{
     width: 50px;
 }
 
-.enter, .shift-right {
+.Enter, .ShiftRight {
     width: 85px;
 }
 
-.space {
+.Space {
     width: 320px;
 }
 
-.backspace, .tab, .delete, .capslock, .enter, .shift-left, .arrow-up, .shift-right, .control, .meta, .alt, .arrow-left, .arrow-down, .arrow-right {
+.Backspace, .Tab, .Delete, .CapsLock, .Enter, .ShiftLeft, .ArrowUp, .ShiftRight, .ControlLeft, .ControlRight, .MetaLeft, .AltLeft, .AltRight, .ArrowLeft, .ArrowDown, .ArrowRight {
     background: #150264;
 }
 
