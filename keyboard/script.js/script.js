@@ -7,6 +7,7 @@ const pDiscription = document.createElement('p');
 const pLanguage = document.createElement('p');
 
 
+
 divContainer.classList.add('container');
 pTitle.textContent = 'RSS Виртуальная клавиатура';
 pTitle.classList.add('title');
@@ -33,7 +34,6 @@ const arrKeyboardEn = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-
 const arrClassKeyboardEn = ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace', 'Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash', 'Delete', 'CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter', 'ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ArrowUp', 'ShiftRight', 'ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlRight'];
 
 
-
 for (let i = 0; i < arrKeyboardEn.length; i += 1) {
     divKeyboard.innerHTML += `     
                 <div class="key ${arrClassKeyboardEn[i]}">
@@ -42,18 +42,24 @@ for (let i = 0; i < arrKeyboardEn.length; i += 1) {
             `;
 }
 
+const keys = document.querySelectorAll('.key');
 
-// add input to the textarea when pressing the computer keyboard - start
 let valueFocus = false;
+//let clickKey = false;
+
+
 
 textarea.addEventListener('focus', function() {
     valueFocus = true;
 });
 textarea.addEventListener('focusout', function() {
     valueFocus = false;
-    textarea.selectionStart = textarea.value.length;
+    //textarea.selectionStart = textarea.value.length;
 });
 
+
+
+// add input to the textarea when pressing the computer keyboard - start
 window.addEventListener('keydown', function(event) {
     if (valueFocus === false) {
         this.document.querySelector(`.${event.code}`).classList.add('active');
@@ -62,13 +68,35 @@ window.addEventListener('keydown', function(event) {
         this.document.querySelector(`.${event.code}`).classList.add('active');
     } 
 }); 
+window.addEventListener('keyup', function(event) {
+    setTimeout(() => {  
+        this.document.querySelector(`.${event.code}`).classList.remove('active');
+        this.document.querySelector(`.${event.code}`).classList.add('remove');
+        this.setTimeout(() => { 
+            this.document.querySelector(`.${event.code}`).classList.remove('remove');
+        }, 300)
+    }, 400);    
+});
 // add input to the textarea when pressing the computer keyboard - end
 
 
-window.addEventListener('keyup', function(event) {
-    this.document.querySelector(`.${event.code}`).classList.remove('active');
-    this.document.querySelector(`.${event.code}`).classList.add('remove');
-    this.setTimeout(() => {
-        this.document.querySelector(`.${event.code}`).classList.remove('remove');
-    }, 300)
-});
+
+// add input to the textarea when clicked mouse - start
+for (let i = 0; i < keys.length; i += 1) {
+    keys[i].addEventListener('click', function() {
+        //textarea.focus();
+        keys[i].classList.add('active');
+        textarea.setRangeText(`${arrKeyboardEn[i]}`, textarea.selectionStart, textarea.selectionEnd, "end");
+        setTimeout(() => {       
+            keys[i].classList.remove('active');
+            keys[i].classList.add('remove');
+                setTimeout(() => {
+                    keys[i].classList.remove('remove');
+                }, 300)
+        }, 400);
+    }); 
+}
+// add input to the textarea when clicked mouse - end
+
+
+
