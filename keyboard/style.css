@@ -39,7 +39,7 @@ body {
     font-family: 'Arial';
 	font-size: 28px; 
     color: rgb(14, 27, 218);
-    text-shadow: 1px 1px 0.5px rgb(6, 176, 228), 0 0 1px blue, 0 0 0.2px blue;
+    text-shadow: 1px 1px 0.5px rgb(0, 151, 211), 0 0 1px blue, 0 0 0.2px blue;
     text-align: center;
 }
 
@@ -93,7 +93,8 @@ body {
 .key.active {
     color: rgb(14, 27, 218);
     background: #7a7a7a;
-	box-shadow: 0 7px 7px -7px rgb(4, 0, 255);
+	/* box-shadow: 0 7px 7px -7px rgb(4, 0, 255); */
+    box-shadow: 0 7px 7px -5px rgb(17, 0, 255);
 	transform: translatey(1.5px);
     
 }
